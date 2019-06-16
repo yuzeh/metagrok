@@ -72,10 +72,8 @@ class Policy(TorchPolicy):
     self.group_affine_more = nn.ModuleList([
       nn.Linear(self.pkmn_size, self.pkmn_size) for _ in range(self.depth - 1)])
 
-    # decision layer = shared_size + pkmn_size + move_size
     self.policy_fc1 = nn.Linear(self.decision_size, self.pkmn_size)
 
-    # 2018-02-12: Add variables for megaEvo and zMove
     self.policy_mega  = nn.Linear(1, self.pkmn_size, bias = False)
     self.policy_zmove = nn.Linear(1, self.pkmn_size, bias = False)
     self.policy_ultra = nn.Linear(1, self.pkmn_size, bias = False)
