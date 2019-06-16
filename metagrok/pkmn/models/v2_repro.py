@@ -13,8 +13,8 @@ from metagrok.torch_policy import TorchPolicy
 from metagrok.torch_utils import masked_softmax, zeros
 
 from metagrok.pkmn import parser
+from metagrok.pkmn.dex import DEX
 from metagrok.pkmn.engine.navigation import extract_players
-from metagrok.pkmn.features import spec, gen7rb_stats
 from metagrok.pkmn.formulae import CONST_HIDDEN, CONST_NONE
 
 EMBED_SIZE = object()
@@ -263,26 +263,26 @@ class Policy(TorchPolicy):
 # -----------------------------------------------------------------------------
 # Extraction code below this line
 
-Moves = spec('BattleMovedex')
-Species = spec('BattlePokedex')
-Types = spec('BattleTypeChart')
-Statuses = spec('BattleStatuses')
-Abilities = spec('BattleAbilities')
-Items = spec('BattleItems')
-Volatiles = spec('BattleVolatiles')
-SideConditions = spec('BattleSideConditionsNew')
-Weathers = spec('BattleWeathers')
+Moves = DEX.spec('BattleMovedex')
+Species = DEX.spec('BattlePokedex')
+Types = DEX.spec('BattleTypeChart')
+Statuses = DEX.spec('BattleStatuses')
+Abilities = DEX.spec('BattleAbilities')
+Items = DEX.spec('BattleItems')
+Volatiles = DEX.spec('BattleVolatiles')
+SideConditions = DEX.spec('BattleSideConditionsNew')
+Weathers = DEX.spec('BattleWeathers')
 
 Stats = ['atk', 'def', 'spa', 'spd', 'spe']
 Boosts = ['accuracy', 'atk', 'def', 'evasion', 'spa', 'spd', 'spe']
 
 # TODO: sample these based off of seen randombattles and not uniformly over species
-MeanStats = gen7rb_stats().mean()[Stats].to_dict()
-StdStats = gen7rb_stats().std()[Stats].to_dict()
+MeanStats = DEX.gen7rb_stats().mean()[Stats].to_dict()
+StdStats = DEX.gen7rb_stats().std()[Stats].to_dict()
 
-MaxHp = gen7rb_stats()['hp'].max()
-MeanHp = gen7rb_stats().mean()['hp']
-StdHp = gen7rb_stats().std()['hp']
+MaxHp = DEX.gen7rb_stats()['hp'].max()
+MeanHp = DEX.gen7rb_stats().mean()['hp']
+StdHp = DEX.gen7rb_stats().std()['hp']
 
 def whiten_stats(stats):
   return {k: (v - MeanStats[k]) / StdStats[k] / 3. for k, v in stats.iteritems()}

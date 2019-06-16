@@ -2,13 +2,14 @@ import collections
 import logging
 import six
 
+from metagrok import config
 from metagrok import fileio
 from metagrok.utils import retrocycle, walk, to_id, const
 
 from metagrok.pkmn.parser import parse_hp_status, parse_poke_details
 
 from metagrok.pkmn import formulae as F
-from metagrok.pkmn.features import info
+from metagrok.pkmn.dex import DEX
 
 from py_mini_racer import py_mini_racer
 
@@ -16,7 +17,9 @@ logger = logging.getLogger(__name__)
 
 @const()
 def script():
-  return fileio.read('build/engine.js').decode('utf-8')
+  return (fileio
+      .read('{}/engine.js'.format(config.get('metagrok_client_root')))
+      .decode('utf-8'))
 
 def mk_ctx():
   rv = py_mini_racer.MiniRacer()
@@ -93,7 +96,7 @@ def _update_with_request(state, req):
     else:
       sp = dict(rp)
       sp.update(parse_poke_details(sp['details']))
-      sp.update(info('BattlePokedex', sp['species']))
+      sp.update(DEX.info('BattlePokedex', sp['species']))
       sp['moveTrack'] = []
       sp['boosts'] = {}
 

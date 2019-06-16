@@ -41,34 +41,10 @@ def data(key):
 
   return rv
 
-@const(_battle_names)
-def embeddings(key):
-  fname = os.path.join(_dex_dir, key + '.embedding.npy')
-  if os.path.isfile(fname):
-    return np.load(fname)
-  return None
-
 def info(key, id):
   return data(key)[id]
 
 HP_REGEX = re.compile(r'hiddenpower([^\d]+)(\d+)')
-_moves = data('BattleMovedex').keys()
-_hps = [m for m in _moves if m.startswith('hiddenpower') and m != 'hiddenpower']
-
-@const(_moves + [m + '60' for m in _hps])
-def moveinfo(id):
-  d = data('BattleMovedex')
-  if id in d:
-    return d[id]
-
-  if id.startswith('hiddenpower'):
-    rv = dict(d['hiddenpower'])
-    match = HP_REGEX.match(id)
-    rv['basePower'] = float(match.group(2))
-    rv['type'] = match.group(1)
-    return rv
-
-  raise ValueError('unknown move id: ' + id)
 
 class CategoricalFeature(object):
   def __init__(self, feature_key):
@@ -80,7 +56,6 @@ class CategoricalFeature(object):
     self.names = keys
     self.feature_key = feature_key
     self.name_to_index = {to_id(k): i for i, k in enumerate(keys)}
-    self.embedding = embeddings(feature_key)
 
   def __call__(self, names):
     return self.nidx(names)
@@ -115,11 +90,6 @@ class CategoricalFeature(object):
     for name in names:
       rv[self.to_index(name)] = 1
     return rv
-
-  def nembed(self, idxes):
-    if self.embedding is not None:
-      return np.stack([self.embedding[idx] for idx in idxes])
-    raise ValueError('Cannot call nembed on Categorical without embedding')
 
 @const(_battle_names)
 def spec(key):
