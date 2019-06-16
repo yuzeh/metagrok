@@ -1,0 +1,110 @@
+{
+  "brn": {
+    "effectType": "Status",
+    "onResidualOrder": 9
+  },
+  "par": {
+    "effectType": "Status",
+    "onBeforeMovePriority": 1
+  },
+  "slp": {
+    "effectType": "Status",
+    "onBeforeMovePriority": 10
+  },
+  "frz": {
+    "effectType": "Status",
+    "onBeforeMovePriority": 10
+  },
+  "psn": {
+    "effectType": "Status",
+    "onResidualOrder": 9
+  },
+  "tox": {
+    "effectType": "Status",
+    "onResidualOrder": 9
+  },
+  "confusion": {
+    "onBeforeMovePriority": 3
+  },
+  "flinch": {
+    "duration": 1,
+    "onBeforeMovePriority": 8
+  },
+  "trapped": {
+    "noCopy": true
+  },
+  "trapper": {
+    "noCopy": true
+  },
+  "partiallytrapped": {
+    "duration": 5,
+    "onResidualOrder": 11
+  },
+  "lockedmove": {
+    "duration": 2
+  },
+  "twoturnmove": {
+    "duration": 2
+  },
+  "choicelock": {},
+  "mustrecharge": {
+    "duration": 2,
+    "onBeforeMovePriority": 11
+  },
+  "futuremove": {
+    "onResidualOrder": 3
+  },
+  "healreplacement": {
+    "onSwitchInPriority": 1
+  },
+  "stall": {
+    "duration": 2,
+    "counterMax": 729
+  },
+  "gem": {
+    "duration": 1,
+    "affectsFainted": true
+  },
+  "raindance": {
+    "effectType": "Weather",
+    "duration": 5,
+    "onResidualOrder": 1
+  },
+  "primordialsea": {
+    "effectType": "Weather",
+    "duration": 0,
+    "onResidualOrder": 1
+  },
+  "sunnyday": {
+    "effectType": "Weather",
+    "duration": 5,
+    "onResidualOrder": 1
+  },
+  "desolateland": {
+    "effectType": "Weather",
+    "duration": 0,
+    "onResidualOrder": 1
+  },
+  "sandstorm": {
+    "effectType": "Weather",
+    "duration": 5,
+    "onModifySpDPriority": 10,
+    "onResidualOrder": 1
+  },
+  "hail": {
+    "effectType": "Weather",
+    "duration": 5,
+    "onResidualOrder": 1
+  },
+  "deltastream": {
+    "effectType": "Weather",
+    "duration": 0,
+    "onResidualOrder": 1
+  },
+  "arceus": {
+    "onSwitchInPriority": 101
+  },
+  "silvally": {
+    "onSwitchInPriority": 101
+  }
+}

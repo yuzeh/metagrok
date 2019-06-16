@@ -1,0 +1,40 @@
+import_config() {
+  # Import config.json variables into the environment.
+  for kv in $(jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]' config.json); do
+    export $kv
+  done
+}
+
+set_safe() {
+  __unsafe=
+}
+
+set_unsafe() {
+  __unsafe=1
+}
+
+start_safe() {
+  if [ ! -z "$__unsafe" ]; then
+    set -e
+  fi
+}
+
+start_unsafe() {
+  set +e
+}
+
+load_nvm() {
+  if [ ! -d ~/.nvm ]; then
+    die 'nvm not found. please install it! (we use it to install the right node version)'
+  fi
+
+  # nvm.sh depends on some errors falling through
+  start_unsafe
+  . ~/.nvm/nvm.sh
+  start_safe
+}
+
+die() {
+  echo $1
+  exit 1
+}

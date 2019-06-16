@@ -1,0 +1,446 @@
+{
+  "standard": {
+    "effectType": "ValidatorRule",
+    "name": "Standard",
+    "desc": [
+      "The standard ruleset for all offical Smogon singles tiers (Ubers, OU, etc.)"
+    ],
+    "ruleset": [
+      "Sleep Clause Mod",
+      "Species Clause",
+      "Nickname Clause",
+      "OHKO Clause",
+      "Moody Clause",
+      "Evasion Moves Clause",
+      "Endless Battle Clause",
+      "HP Percentage Mod",
+      "Cancel Mod"
+    ],
+    "banlist": [
+      "Unreleased",
+      "Illegal"
+    ]
+  },
+  "standardnext": {
+    "effectType": "ValidatorRule",
+    "name": "Standard NEXT",
+    "desc": [
+      "The standard ruleset for the NEXT mod"
+    ],
+    "ruleset": [
+      "Sleep Clause Mod",
+      "Species Clause",
+      "Nickname Clause",
+      "OHKO Clause",
+      "HP Percentage Mod",
+      "Cancel Mod"
+    ],
+    "banlist": [
+      "Illegal",
+      "Soul Dew"
+    ]
+  },
+  "standardubers": {
+    "effectType": "ValidatorRule",
+    "name": "Standard Ubers",
+    "desc": [
+      "The standard ruleset for [Gen 5] Ubers"
+    ],
+    "ruleset": [
+      "Sleep Clause Mod",
+      "Species Clause",
+      "Nickname Clause",
+      "Moody Clause",
+      "OHKO Clause",
+      "Endless Battle Clause",
+      "HP Percentage Mod",
+      "Cancel Mod"
+    ],
+    "banlist": [
+      "Unreleased",
+      "Illegal"
+    ]
+  },
+  "standardgbu": {
+    "effectType": "ValidatorRule",
+    "name": "Standard GBU",
+    "desc": [
+      "The standard ruleset for all official in-game Pok&eacute;mon tournaments and Battle Spot"
+    ],
+    "ruleset": [
+      "Species Clause",
+      "Nickname Clause",
+      "Item Clause",
+      "Team Preview",
+      "Cancel Mod"
+    ],
+    "banlist": [
+      "Unreleased",
+      "Illegal",
+      "Battle Bond",
+      "Mewtwo",
+      "Mew",
+      "Lugia",
+      "Ho-Oh",
+      "Celebi",
+      "Kyogre",
+      "Groudon",
+      "Rayquaza",
+      "Jirachi",
+      "Deoxys",
+      "Dialga",
+      "Palkia",
+      "Giratina",
+      "Phione",
+      "Manaphy",
+      "Darkrai",
+      "Shaymin",
+      "Arceus",
+      "Victini",
+      "Reshiram",
+      "Zekrom",
+      "Kyurem",
+      "Keldeo",
+      "Meloetta",
+      "Genesect",
+      "Xerneas",
+      "Yveltal",
+      "Zygarde",
+      "Diancie",
+      "Hoopa",
+      "Volcanion",
+      "Cosmog",
+      "Cosmoem",
+      "Solgaleo",
+      "Lunala",
+      "Necrozma",
+      "Magearna",
+      "Marshadow",
+      "Zeraora"
+    ]
+  },
+  "minimalgbu": {
+    "effectType": "ValidatorRule",
+    "name": "Minimal GBU",
+    "desc": [
+      "The standard ruleset for official tournaments, but without Restricted Legendary bans"
+    ],
+    "ruleset": [
+      "Species Clause",
+      "Nickname Clause",
+      "Item Clause",
+      "Cancel Mod"
+    ],
+    "banlist": [
+      "Unreleased",
+      "Illegal",
+      "Battle Bond",
+      "Mew",
+      "Celebi",
+      "Jirachi",
+      "Deoxys",
+      "Phione",
+      "Manaphy",
+      "Darkrai",
+      "Shaymin",
+      "Arceus",
+      "Victini",
+      "Keldeo",
+      "Meloetta",
+      "Genesect",
+      "Diancie",
+      "Hoopa",
+      "Volcanion",
+      "Magearna",
+      "Marshadow"
+    ]
+  },
+  "standarddoubles": {
+    "effectType": "ValidatorRule",
+    "name": "Standard Doubles",
+    "desc": [
+      "The standard ruleset for all official Smogon doubles tiers"
+    ],
+    "ruleset": [
+      "Species Clause",
+      "Nickname Clause",
+      "OHKO Clause",
+      "Moody Clause",
+      "Evasion Abilities Clause",
+      "Evasion Moves Clause",
+      "Endless Battle Clause",
+      "HP Percentage Mod",
+      "Cancel Mod"
+    ],
+    "banlist": [
+      "Unreleased",
+      "Illegal"
+    ]
+  },
+  "pokemon": {
+    "effectType": "ValidatorRule",
+    "name": "Pokemon",
+    "desc": [
+      "The foundational rules for any and all formats based on in-game mechanics (everything but Custom Game)"
+    ]
+  },
+  "hoennpokedex": {
+    "effectType": "ValidatorRule",
+    "name": "Hoenn Pokedex",
+    "desc": [
+      "Only allows Pok&eacute;mon native to the Hoenn region (OR/AS)"
+    ]
+  },
+  "alolapokedex": {
+    "effectType": "ValidatorRule",
+    "name": "Alola Pokedex",
+    "desc": [
+      "Only allows Pok&eacute;mon native to the Alola region (US/UM)"
+    ]
+  },
+  "potd": {
+    "effectType": "Rule",
+    "name": "PotD"
+  },
+  "teampreview": {
+    "effectType": "Rule",
+    "name": "Team Preview",
+    "desc": [
+      "Allows each player to see the Pok&eacute;mon on their opponent's team before they choose their lead Pok&eacute;mon"
+    ],
+    "onStartPriority": -10
+  },
+  "littlecup": {
+    "effectType": "ValidatorRule",
+    "name": "Little Cup",
+    "desc": [
+      "Only allows Pok&eacute;mon that can evolve and don't have any prior evolutions"
+    ]
+  },
+  "speciesclause": {
+    "effectType": "ValidatorRule",
+    "name": "Species Clause",
+    "desc": [
+      "Prevents teams from having more than one Pok&eacute;mon from the same species"
+    ]
+  },
+  "nicknameclause": {
+    "effectType": "ValidatorRule",
+    "name": "Nickname Clause",
+    "desc": [
+      "Prevents teams from having more than one Pok&eacute;mon with the same nickname"
+    ]
+  },
+  "itemclause": {
+    "effectType": "ValidatorRule",
+    "name": "Item Clause",
+    "desc": [
+      "Prevents teams from having more than one Pok&eacute;mon with the same item"
+    ]
+  },
+  "abilityclause": {
+    "effectType": "ValidatorRule",
+    "name": "Ability Clause",
+    "desc": [
+      "Prevents teams from having more than two Pok&eacute;mon with the same ability"
+    ]
+  },
+  "ohkoclause": {
+    "effectType": "ValidatorRule",
+    "name": "OHKO Clause",
+    "desc": [
+      "Bans all OHKO moves, such as Fissure"
+    ]
+  },
+  "evasionabilitiesclause": {
+    "effectType": "ValidatorRule",
+    "name": "Evasion Abilities Clause",
+    "desc": [
+      "Bans abilities that boost Evasion under certain weather conditions"
+    ],
+    "banlist": [
+      "Sand Veil",
+      "Snow Cloak"
+    ]
+  },
+  "evasionmovesclause": {
+    "effectType": "ValidatorRule",
+    "name": "Evasion Moves Clause",
+    "desc": [
+      "Bans moves that consistently raise the user's evasion when used, or when powered up by a Z Crystal"
+    ],
+    "banlist": [
+      "Minimize",
+      "Double Team"
+    ]
+  },
+  "endlessbattleclause": {
+    "effectType": "Rule",
+    "name": "Endless Battle Clause",
+    "desc": [
+      "Prevents players from forcing a battle which their opponent cannot end except by forfeit"
+    ]
+  },
+  "moodyclause": {
+    "effectType": "ValidatorRule",
+    "name": "Moody Clause",
+    "desc": [
+      "Bans the ability Moody"
+    ],
+    "banlist": [
+      "Moody"
+    ]
+  },
+  "swaggerclause": {
+    "effectType": "ValidatorRule",
+    "name": "Swagger Clause",
+    "desc": [
+      "Bans the move Swagger"
+    ],
+    "banlist": [
+      "Swagger"
+    ]
+  },
+  "batonpassclause": {
+    "effectType": "ValidatorRule",
+    "name": "Baton Pass Clause",
+    "desc": [
+      "Stops teams from having more than one Pok&eacute;mon with Baton Pass, and no Pok&eacute;mon may be capable of passing boosts to both Speed and another stat"
+    ],
+    "banlist": [
+      "Baton Pass > 1"
+    ]
+  },
+  "cfzclause": {
+    "effectType": "ValidatorRule",
+    "name": "CFZ Clause",
+    "desc": [
+      "Bans the use of crystal-free Z-Moves"
+    ],
+    "banlist": [
+      "10,000,000 Volt Thunderbolt",
+      "Acid Downpour",
+      "All-Out Pummeling",
+      "Black Hole Eclipse",
+      "Bloom Doom",
+      "Breakneck Blitz",
+      "Catastropika",
+      "Clangorous Soulblaze",
+      "Continental Crush",
+      "Corkscrew Crash",
+      "Devastating Drake",
+      "Extreme Evoboost",
+      "Genesis Supernova",
+      "Gigavolt Havoc",
+      "Guardian of Alola",
+      "Hydro Vortex",
+      "Inferno Overdrive",
+      "Let's Snuggle Forever",
+      "Light That Burns the Sky",
+      "Malicious Moonsault",
+      "Menacing Moonraze Maelstrom",
+      "Never-Ending Nightmare",
+      "Oceanic Operetta",
+      "Pulverizing Pancake",
+      "Savage Spin-Out",
+      "Searing Sunraze Smash",
+      "Shattered Psyche",
+      "Sinister Arrow Raid",
+      "Soul-Stealing 7-Star Strike",
+      "Splintered Stormshards",
+      "Stoked Sparksurfer",
+      "Subzero Slammer",
+      "Supersonic Skystrike",
+      "Tectonic Rage",
+      "Twinkle Tackle"
+    ]
+  },
+  "hppercentagemod": {
+    "effectType": "Rule",
+    "name": "HP Percentage Mod",
+    "desc": [
+      "Shows the HP of Pok&eacute;mon in percentages"
+    ]
+  },
+  "exacthpmod": {
+    "effectType": "Rule",
+    "name": "Exact HP Mod",
+    "desc": [
+      "Shows the exact HP of all Pok&eacute;mon"
+    ]
+  },
+  "cancelmod": {
+    "effectType": "Rule",
+    "name": "Cancel Mod",
+    "desc": [
+      "Allows players to change their own choices before their opponents make one"
+    ]
+  },
+  "sleepclausemod": {
+    "effectType": "Rule",
+    "name": "Sleep Clause Mod",
+    "desc": [
+      "Prevents players from putting more than one of their opponent's Pok&eacute;mon to sleep at a time, and bans Mega Gengar from using Hypnosis"
+    ],
+    "banlist": [
+      "Hypnosis + Gengarite"
+    ]
+  },
+  "freezeclausemod": {
+    "effectType": "Rule",
+    "name": "Freeze Clause Mod",
+    "desc": [
+      "Prevents players from freezing more than one of their opponent's Pok&eacute;mon at a time"
+    ]
+  },
+  "sametypeclause": {
+    "effectType": "ValidatorRule",
+    "name": "Same Type Clause",
+    "desc": [
+      "Forces all Pok&eacute;mon on a team to share a type with each other"
+    ]
+  },
+  "megarayquazaclause": {
+    "effectType": "Rule",
+    "name": "Mega Rayquaza Clause",
+    "desc": [
+      "Prevents Rayquaza from mega evolving"
+    ]
+  },
+  "inversemod": {
+    "effectType": "Rule",
+    "name": "Inverse Mod",
+    "desc": [
+      "The mod for Inverse Battle which inverts the type effectiveness chart, swapping resistances and weaknesses with each other"
+    ],
+    "onNegateImmunity": false
+  },
+  "ignoreillegalabilities": {
+    "effectType": "ValidatorRule",
+    "name": "Ignore Illegal Abilities",
+    "desc": [
+      "Allows Pok&eacute;mon to use any ability"
+    ]
+  },
+  "ignorestabmoves": {
+    "effectType": "ValidatorRule",
+    "name": "Ignore STAB Moves",
+    "desc": [
+      "Allows Pok&eacute;mon to use any move that they or a previous evolution/out-of-battle forme share a type with"
+    ]
+  },
+  "allowonesketch": {
+    "effectType": "ValidatorRule",
+    "name": "Allow One Sketch",
+    "desc": [
+      "Allows each Pok&eacute;mon to use one move they don't normally have access to via Sketch"
+    ]
+  },
+  "allowcap": {
+    "effectType": "ValidatorRule",
+    "name": "Allow CAP",
+    "desc": [
+      "Allows the use of Pok&eacute;mon, abilities, moves, and items made by the Create-A-Pok&eacute;mon project"
+    ]
+  }
+}

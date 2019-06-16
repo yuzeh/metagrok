@@ -1,0 +1,63 @@
+|init|battle
+|title|yuzeh vs. WutDaFuk?
+|j|☆yuzeh
+|request|
+|j|☆WutDaFuk?
+|player|p1|yuzeh|102
+|request|{"teamPreview":true,"maxTeamSize":6,"side":{"name":"yuzeh","id":"p1","pokemon":[{"ident":"p1: A1","details":"Necrozma-Dawn-Wings","condition":"336/336","active":true,"stats":{"atk":207,"def":254,"spa":413,"spd":290,"spe":278},"moves":["calmmind","morningsun","photongeyser","heatwave"],"baseAbility":"prismarmor","item":"ultranecroziumz","pokeball":"pokeball","ability":"prismarmor"},{"ident":"p1: A2","details":"Salamence, M, shiny","condition":"331/331","active":false,"stats":{"atk":369,"def":196,"spa":230,"spd":197,"spe":328},"moves":["dragondance","frustration","roost","earthquake"],"baseAbility":"intimidate","item":"salamencite","pokeball":"pokeball","ability":"intimidate"},{"ident":"p1: A3","details":"Arceus-Steel","condition":"398/398","active":false,"stats":{"atk":220,"def":276,"spa":323,"spd":276,"spe":372},"moves":["judgment","defog","icebeam","recover"],"baseAbility":"multitype","item":"ironplate","pokeball":"pokeball","ability":"multitype"},{"ident":"p1: A4","details":"Pheromosa, shiny","condition":"283/283","active":false,"stats":{"atk":373,"def":99,"spa":311,"spd":110,"spe":441},"moves":["highjumpkick","bugbuzz","icebeam","poisonjab"],"baseAbility":"beastboost","item":"focussash","pokeball":"pokeball","ability":"beastboost"},{"ident":"p1: A5","details":"Yveltal, shiny","condition":"393/393","active":false,"stats":{"atk":240,"def":226,"spa":361,"spd":233,"spe":326},"moves":["darkpulse","taunt","focusblast","oblivionwing"],"baseAbility":"darkaura","item":"lifeorb","pokeball":"pokeball","ability":"darkaura"},{"ident":"p1: A6","details":"Deoxys-Speed, shiny","condition":"304/304","active":false,"stats":{"atk":227,"def":216,"spa":203,"spd":216,"spe":504},"moves":["extremespeed","spikes","taunt","knockoff"],"baseAbility":"pressure","item":"focussash","pokeball":"pokeball","ability":"pressure"}]},"rqid":2}
+|player|p2|WutDaFuk?|169
+|teamsize|p1|6
+|teamsize|p2|6
+|gametype|singles
+|gen|7
+|tier|[Gen 7] Ubers
+|rated|
+|seed|
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Moody Clause: Moody is banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|clearpoke
+|poke|p1|Necrozma-Dawn-Wings|item
+|poke|p1|Salamence, M|item
+|poke|p1|Arceus-*|item
+|poke|p1|Pheromosa|item
+|poke|p1|Yveltal|item
+|poke|p1|Deoxys-Speed|item
+|poke|p2|Marshadow|item
+|poke|p2|Necrozma-Dusk-Mane|item
+|poke|p2|Xerneas|item
+|poke|p2|Landorus-Therian, M|item
+|poke|p2|Chansey, F|item
+|poke|p2|Ninetales-Alola, F|item
+|rule|Mega Rayquaza Clause: You cannot mega evolve Rayquaza
+|teampreview
+|
+|start
+|switch|p1a: A1|Necrozma-Dawn-Wings|336/336
+|switch|p2a: Ninetales|Ninetales-Alola, F|100/100
+|-weather|Hail|[from] ability: Snow Warning|[of] p2a: Ninetales
+|turn|1
+|
+|detailschange|p1a: A1|Necrozma-Ultra
+|-burst|p1a: A1|Necrozma|Ultranecrozium Z
+|move|p1a: A1|Heat Wave|p2a: Ninetales
+|-supereffective|p2a: Ninetales
+|-damage|p2a: Ninetales|6/100
+|-status|p2a: Ninetales|brn
+|move|p2a: Ninetales|Aurora Veil|p2a: Ninetales
+|-sidestart|p2: WutDaFuk?|move: Aurora Veil
+|
+|-weather|Hail|[upkeep]
+|-damage|p1a: A1|315/336|[from] Hail
+|-damage|p2a: Ninetales|0 fnt|[from] brn
+|upkeep
+|faint|p2a: Ninetales
+|request|{"active":[{"moves":[{"move":"Calm Mind","id":"calmmind","pp":32,"maxpp":32,"target":"self","disabled":false},{"move":"Morning Sun","id":"morningsun","pp":8,"maxpp":8,"target":"self","disabled":false},{"move":"Photon Geyser","id":"photongeyser","pp":8,"maxpp":8,"target":"normal","disabled":false},{"move":"Heat Wave","id":"heatwave","pp":15,"maxpp":16,"target":"allAdjacentFoes","disabled":false}],"canZMove":[null,null,{"move":"Light That Burns the Sky","target":"normal"},null]}],"side":{"name":"yuzeh","id":"p1","pokemon":[{"ident":"p1: A1","details":"Necrozma-Ultra","condition":"315/336","active":true,"stats":{"atk":305,"def":230,"spa":433,"spd":230,"spe":392},"moves":["calmmind","morningsun","photongeyser","heatwave"],"baseAbility":"neuroforce","item":"ultranecroziumz","pokeball":"pokeball","ability":"neuroforce"},{"ident":"p1: A2","details":"Salamence, M, shiny","condition":"331/331","active":false,"stats":{"atk":369,"def":196,"spa":230,"spd":197,"spe":328},"moves":["dragondance","frustration","roost","earthquake"],"baseAbility":"intimidate","item":"salamencite","pokeball":"pokeball","ability":"intimidate"},{"ident":"p1: A3","details":"Arceus-Steel","condition":"398/398","active":false,"stats":{"atk":220,"def":276,"spa":323,"spd":276,"spe":372},"moves":["judgment","defog","icebeam","recover"],"baseAbility":"multitype","item":"ironplate","pokeball":"pokeball","ability":"multitype"},{"ident":"p1: A4","details":"Pheromosa, shiny","condition":"283/283","active":false,"stats":{"atk":373,"def":99,"spa":311,"spd":110,"spe":441},"moves":["highjumpkick","bugbuzz","icebeam","poisonjab"],"baseAbility":"beastboost","item":"focussash","pokeball":"pokeball","ability":"beastboost"},{"ident":"p1: A5","details":"Yveltal, shiny","condition":"393/393","active":false,"stats":{"atk":240,"def":226,"spa":361,"spd":233,"spe":326},"moves":["darkpulse","taunt","focusblast","oblivionwing"],"baseAbility":"darkaura","item":"lifeorb","pokeball":"pokeball","ability":"darkaura"},{"ident":"p1: A6","details":"Deoxys-Speed, shiny","condition":"304/304","active":false,"stats":{"atk":227,"def":216,"spa":203,"spd":216,"spe":504},"moves":["extremespeed","spikes","taunt","knockoff"],"baseAbility":"pressure","item":"focussash","pokeball":"pokeball","ability":"pressure"}]},"rqid":8}
+|
+|switch|p2a: Xerneas|Xerneas|100/100
+|-ability|p2a: Xerneas|Fairy Aura
+|turn|2
