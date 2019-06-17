@@ -88,15 +88,15 @@ class Dex(object):
     return F.estimate_stats(df, level)
 
   def spec(self, key):
-    return CategoricalFeature(key)
+    return CategoricalFeature(key, self.data(key))
   
   def info(self, key, id):
     return self.data(key)[id]
 
 
 class CategoricalFeature(object):
-  def __init__(self, feature_key):
-    keys = data(feature_key).keys()
+  def __init__(self, feature_key, dt):
+    keys = dt.keys()
     keys.extend(_key_to_extras[feature_key])
     keys = list(set(keys))
     keys.sort()

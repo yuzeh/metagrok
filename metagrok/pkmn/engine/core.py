@@ -26,6 +26,12 @@ def mk_ctx():
   rv.eval(script())
   return rv
 
+def postprocess(state, req):
+  _postprocess_engine_state(state)
+  if req:
+    _update_with_request(state, req)
+    _remove_illusions(state)
+
 class Engine(object):
   def __init__(self, id = None):
     self.id = id
@@ -37,10 +43,7 @@ class Engine(object):
 
   def fetch(self, gid, req = None):
     state = self._fetch(gid)
-    _postprocess_engine_state(state)
-    if req:
-      _update_with_request(state, req)
-      _remove_illusions(state)
+    postprocess(state, req)
     if logger.isEnabledFor(3):
       logger.log(3, 'fetch(%s) = %s', gid, state)
     return state
