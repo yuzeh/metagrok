@@ -1,4 +1,4 @@
-# Metagrok
+# Metagrok (README WIP)
 A self-play RL system for learning to battle on [Pokémon Showdown](showdown).
 This code was used in the work [[ PAPER ]].
 
