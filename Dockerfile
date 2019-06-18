@@ -27,22 +27,24 @@ COPY scripts/predef /root/scripts
 COPY config.json /root
 
 # Install vmtouch
-COPY scripts/install-vmtouch.bash /root/scripts
-RUN bash scripts/install-vmtouch.bash && rm scripts/install-vmtouch.bash
+COPY scripts/install-vmtouch.sh /root/scripts
+RUN sh scripts/install-vmtouch.sh && rm scripts/install-vmtouch.sh
 
 # Install htop
-COPY scripts/install-htop.bash /root/scripts
-RUN bash scripts/install-htop.bash && rm scripts/install-htop.bash
+COPY scripts/install-htop.sh /root/scripts
+RUN sh scripts/install-htop.sh && rm scripts/install-htop.sh
 
 # Install nvm
-COPY scripts/install-nvm.bash /root/scripts
-RUN bash scripts/install-nvm.bash && rm scripts/install-nvm.bash
+COPY scripts/install-nvm.sh /root/scripts
+RUN sh scripts/install-nvm.sh && rm scripts/install-nvm.sh
 
 # Install Pokemon Showdown
 COPY scripts/install-showdown.sh /root/scripts
-RUN bash scripts/install-showdown.sh --no-client && rm scripts/install-showdown.sh
+RUN sh scripts/install-showdown.sh --no-client && rm scripts/install-showdown.sh
 
 # Install everything else
 COPY scripts /root/scripts
+RUN sh scripts/install-more-conda-packages.sh
+
 RUN echo 'set -o vi' >> /root/.bashrc
 RUN echo 'source activate metagrok' >> /root/.bashrc

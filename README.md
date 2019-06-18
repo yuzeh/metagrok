@@ -1,6 +1,6 @@
 # Metagrok
 A self-play RL system for learning to battle on [Pokémon Showdown](showdown).
-This library was used in the work [[ PAPER ]].
+This code was used in the work [[ PAPER ]].
 
 ## How does it work?
 There are three pieces of functionality that make this system work:
@@ -20,16 +20,60 @@ There are three pieces of functionality that make this system work:
 
 ## How do I get it to run?
 
-The first thing to do is to set up the correct Node version and create the headless client:
+Most development happens in a local Docker container. To set that up:
 
-    scripts/install.sh --no-server
+    docker build . --tag metagrok:latest
+
+This docker container freezes versioning for three main components:
+
+* Python environment and conda packages
+* Node.js version
+* Pokémon Showdown server commit SHA
+
+Any update to one of these things require a rebuild of the docker container.
+In particular, no source code (i.e. nothing in the `metagrok/` or the `js/` directories) is frozen.
+For convenience during development, any new conda packages that are installed should simply be
+appended to `scripts/install-more-conda-packages.sh`.
+
+To develop code in this environment, run in a terminal window:
+
+    docker run -it -v $(pwd):/root/workspace --entrypoint /bin/bash metagrok:latest
+
+    # inside the docker instance
+    (metagrok) [root@6a31f1d57424]# cd workspace
+
+### Building Showdown-related components
+
+The first thing to do is to set up the correct Node version, download both showdown repos, and
+create the headless client:
+
+    scripts/install.sh
     scripts/compile-headless-client.sh
 
 This creates the headless client at `build/engine.js`.
 
-Most development happens in a local Docker container. To set that up:
+The rest of this section contains common things one might want to do with a Showdown bot.
 
-    docker build .
+### Evaluating a bot against another bot
+
+    ./rp metagrok/exe/head2head.py \
+        --format gen7randombattle \
+        --p1 ,metagrok.pkmn.engine.baselines.MostDamageMovePlayerTypeAware \
+        --p2 metagrok.pkmn.models.V3Quad:static/sample-v3-quad-model.pytorch \
+        --num-matches 10 --parallelism 4
+
+### Evaluating a bot against humans on a Pokémon Showdown server
+
+    # Set up showdown server on localhost:8000
+    ./rp metagrok/exe/smogon_eval.py \
+        metagrok.pkmn.models.V3Quad:static/sample-v3-quad-model.pytorch \
+        --num-matches 10 \
+        --max-concurrent 5 \
+        --host localhost --port 8000
+
+### Training the bot
+
+TODO add this portion
 
 [showdown]: https://pokemonshowdown.com
 [ps]: https://github.com/Zarel/Pokemon-Showdown
