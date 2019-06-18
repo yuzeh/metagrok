@@ -51,7 +51,9 @@ main() {
     js/engine.js \
     > $work_dir/engine.js
   
-  test_compile_working
+  # This part is not necessary, nor will it work, unless you have the conda env installed
+  # locally as opposed to just in the docker environment.
+  # test_compile_working
 }
 
 main $*
