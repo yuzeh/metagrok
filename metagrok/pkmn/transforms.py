@@ -6,9 +6,9 @@ from metagrok.pkmn.engine.navigation import extract_players
 
 def scramble(item):
   player_moves = [_random_permutation(4) for _ in range(6)]
-  player_pkmns = [0] + _shuffle(range(1, 6))
+  player_pkmns = [0] + _shuffle(list(range(1, 6)))
   opponent_moves = [_random_permutation(4) for _ in range(6)]
-  opponent_pkmns = [0] + _shuffle(range(1, 6))
+  opponent_pkmns = [0] + _shuffle(list(range(1, 6)))
 
   reorder(item, player_moves, player_pkmns, opponent_moves, opponent_pkmns)
   return item
@@ -84,7 +84,7 @@ def _apply_perm(old, perm):
   return new
 
 def _random_permutation(n):
-  return _shuffle(range(n))
+  return _shuffle(list(range(n)))
 
 def _shuffle(vs):
   rv = list(vs)
@@ -112,10 +112,10 @@ def main():
   args = parser.parse_args()
   data = json.load(args.input_file)
 
-  player_moves = [range(4) for _ in range(6)]
-  player_pkmns = range(6)
-  opponent_moves = [range(4) for _ in range(6)]
-  opponent_pkmns = range(6)
+  player_moves = [list(range(4)) for _ in range(6)]
+  player_pkmns = list(range(6))
+  opponent_moves = [list(range(4)) for _ in range(6)]
+  opponent_pkmns = list(range(6))
 
   player_pkmns = [0, 1, 2, 3, 5, 4]
   # opponent_moves[1] = [2, 0, 3, 1]

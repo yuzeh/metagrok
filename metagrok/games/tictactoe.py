@@ -26,7 +26,7 @@ class Game(api.BaseGame):
 
   def play(self, first, second):
     players = {1: first, -1: second}
-    for k, player in players.iteritems():
+    for k, player in players.items():
       player.update('whoami', k)
 
     rv = {}
@@ -75,7 +75,7 @@ class Game(api.BaseGame):
     buf.append((state_view.copy().tolist(), None))
     rv['winner'] = ended
 
-    for idx, player in players.iteritems():
+    for idx, player in players.items():
       if ended == 0:
         data = 'tie'
       elif idx == ended:

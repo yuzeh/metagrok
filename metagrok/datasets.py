@@ -37,7 +37,7 @@ class ExampleDataset(Dataset):
       if k in item:
         rv[k] = item[k]
 
-    for k, v in fs.iteritems():
+    for k, v in fs.items():
       rv['features_' + k] = v
 
     return rv
@@ -118,7 +118,7 @@ class ExampleJsonsDataset(Dataset):
       if k in item:
         rv[k] = item[k]
 
-    for k, v in fs.iteritems():
+    for k, v in fs.items():
       rv['features_' + k] = v
 
     return rv

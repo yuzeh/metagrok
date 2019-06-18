@@ -14,7 +14,7 @@ class TTensorDictDataset(Dataset):
     self.in_place_shuffle = in_place_shuffle
 
     self._tensors = tensors
-    self._size = next(tensors.itervalues()).shape[0]
+    self._size = next(iter(tensors.values())).shape[0]
 
   def __getitem__(self, index):
     return {k: self._tensors[k][index] for k in self._tensors}
@@ -30,12 +30,12 @@ class TTensorDictDataset(Dataset):
 class NDArrayDictDataset(TTensorDictDataset):
   def __init__(self, ndarrays, in_place_shuffle = True):
     super(NDArrayDictDataset, self).__init__(
-        {k: torch.from_numpy(v) for k, v in ndarrays.iteritems()}, in_place_shuffle)
+        {k: torch.from_numpy(v) for k, v in ndarrays.items()}, in_place_shuffle)
     self._ndarrays = ndarrays
 
   def shuffle_(self):
     perm = npr.permutation(len(self))
-    for v in self._ndarrays.itervalues():
+    for v in self._ndarrays.values():
       np.take(v, perm, axis = 0, out = v)
 
 class MemmapDictDataset(Dataset):
@@ -43,13 +43,13 @@ class MemmapDictDataset(Dataset):
     self.dirname = tempfile.mkdtemp()
     self._name2memmap = {
         k: self._load_mmap(k, v)
-        for k, v in npzfile.iteritems()
+        for k, v in npzfile.items()
     }
-    self._size = next(self._name2memmap.itervalues()).shape[0]
+    self._size = next(iter(self._name2memmap.values())).shape[0]
 
   def __getitem__(self, index):
     rv = {}
-    for k, v in self._name2memmap.iteritems():
+    for k, v in self._name2memmap.items():
       rv[k] = v[index]
     return rv
 

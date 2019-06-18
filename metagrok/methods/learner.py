@@ -9,7 +9,7 @@ import multiprocessing as mulproc
 from multiprocessing import sharedctypes
 import threading
 if sys.version_info[0] == 2:
-    import Queue as queue
+    import queue as queue
 else:
     import queue
 
@@ -136,7 +136,7 @@ def rollup(policy, iter_dir, gamma, lam, reward_shaper = None, num_workers = 0,
 
   logger.info('Rollup has %s files' % len(fnames))
   pool = mulproc.Pool()
-  linecount = dict(zip(fnames, pool.map(utils.linecount, fnames)))
+  linecount = dict(list(zip(fnames, pool.map(utils.linecount, fnames))))
   pool.close()
 
   start_rows = {}
@@ -166,7 +166,7 @@ def rollup(policy, iter_dir, gamma, lam, reward_shaper = None, num_workers = 0,
       na = max(t[k].shape[0], n_actions)
       type_info[k] = ((nrows, na), config.nt())
 
-  for k, v in fs.iteritems():
+  for k, v in fs.items():
     type_info['features_' + k] = ((nrows,) + v.shape, v.dtype)
 
   if num_workers > 0:
@@ -178,7 +178,7 @@ def rollup(policy, iter_dir, gamma, lam, reward_shaper = None, num_workers = 0,
 
   underlying = {}
   data = {}
-  for k, (shape, dtype) in type_info.iteritems():
+  for k, (shape, dtype) in type_info.items():
     size = six.moves.reduce(lambda x, y: x * y, shape, 1)
     u = underlying[k] = mk_buf_fn(shape, dtype)
     d = np.frombuffer(u, dtype = dtype, count = size)
@@ -186,7 +186,7 @@ def rollup(policy, iter_dir, gamma, lam, reward_shaper = None, num_workers = 0,
     data[k] = d
 
   in_queue = queue_mod.Queue()
-  for kv in start_rows.iteritems():
+  for kv in start_rows.items():
     in_queue.put(kv)
   out_queue = queue_mod.Queue()
 
@@ -256,7 +256,7 @@ def _worker_loop(
 
   policy = TorchPolicy.unpkl(policy_pkl)
   data = {}
-  for k, (shape, dtype) in type_info.iteritems():
+  for k, (shape, dtype) in type_info.items():
     size = six.moves.reduce(lambda x, y: x * y, shape, 1)
     d = np.frombuffer(underlying[k], dtype = dtype, count = size)
     d.shape = shape
@@ -278,7 +278,7 @@ def _worker_loop(
     out_queue.put(e)
 
 def _rollup_assign(data, t, fs, row_num):
-  for k, v in fs.iteritems():
+  for k, v in fs.items():
     data['features_' + k][row_num] = v
 
   data['actions'][row_num] = t['action']

@@ -29,12 +29,12 @@ class Game(api.BaseGame):
     while True:
       block = battle.recv()
       blocks.append(block)
-      for name, player in players.iteritems():
+      for name, player in players.items():
         for log in block[name + 'log']:
           player.update(log)
 
       if block['winner']:
-        for name, player in players.iteritems():
+        for name, player in players.items():
           if block['winner'] == 'tie':
             player.end('tie')
           elif block['winner'] == name:
@@ -44,7 +44,7 @@ class Game(api.BaseGame):
         break
 
       actions = {}
-      for name, player in players.iteritems():
+      for name, player in players.items():
         for req in block[name + 'req']:
           action = player.request(req)
           if action:
@@ -52,7 +52,7 @@ class Game(api.BaseGame):
               raise ValueError('Second action formed: ' + req)
             actions[name] = action
 
-      for name, action in actions.items():
+      for name, action in list(actions.items()):
         actions[name] = action.get()
 
       battle.send(actions.get('p1'), actions.get('p2'))

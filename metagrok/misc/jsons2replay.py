@@ -84,7 +84,7 @@ def mk_row(es, is_header = False):
   middle = ''.join('<{tag} width="100px">{name}'.format(tag = tag, name = e) for e in es)
   return '<tr>' + middle + '</tr>'
 
-TEMPLATE = u'''
+TEMPLATE = '''
 <!DOCTYPE html>
 <meta charset="utf-8" />
 <!-- version 1 -->

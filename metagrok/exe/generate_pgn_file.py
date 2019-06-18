@@ -8,9 +8,9 @@ def main():
     w_num = int(row['wins'])
     l_num = int(row['losses'])
 
-    for _ in xrange(w_num):
+    for _ in range(w_num):
       args.pgn_out.write('[White "%s"][Black "%s"][Result "1-0"] 1. c4 Nf6\n' % (white, black))
-    for _ in xrange(l_num):
+    for _ in range(l_num):
       args.pgn_out.write('[White "%s"][Black "%s"][Result "0-1"] 1. c4 Nf6\n' % (white, black))
 
 def parse_args():

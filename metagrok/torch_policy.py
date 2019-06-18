@@ -37,7 +37,7 @@ class TorchPolicy(nn.Module):
     features = self.extract(state, candidates)
 
     torch_features = {}
-    for k, v in features.items():
+    for k, v in list(features.items()):
       v = ag.Variable(torch.from_numpy(np.expand_dims(v, axis = 0)))
       if config.use_cuda():
         v = v.cuda()

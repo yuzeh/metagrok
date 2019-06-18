@@ -169,7 +169,7 @@ class PolicyUpdater(object):
 
       if optimize:
         total_loss = 0
-        for name, loss in losses.iteritems():
+        for name, loss in losses.items():
           if not name.startswith('_'):
             total_loss += loss / pbatches_per_vbatch
         total_loss.backward()
@@ -180,7 +180,7 @@ class PolicyUpdater(object):
           self.optimizer.step()
           self.optimizer.zero_grad()
 
-      for name, loss in losses.iteritems():
+      for name, loss in losses.items():
         rv[name] = (rv[name] * (batch_count - 1) + float(loss.mean().data.item())) / batch_count
 
       old_count = count
@@ -243,7 +243,7 @@ class PolicyUpdater(object):
   def _prepare_learning_rate(self):
     target_lr = None
 
-    if isinstance(self._opt_lr, (float,)):
+    if isinstance(self._opt_lr, float):
       target_lr = self._opt_lr
     else:
       assert self._opt_lr
@@ -296,7 +296,7 @@ def compute_metrics(policy, batch, losses):
   rv['ent'] = float(results['entropy'].mean().item())
 
   total = 0
-  for name, loss in losses.iteritems():
+  for name, loss in losses.items():
     if not name.startswith('_'):
       total += loss
     rv[name] = loss
@@ -305,19 +305,19 @@ def compute_metrics(policy, batch, losses):
 
 def _var(batch):
   rv = {}
-  for k, v in batch.iteritems():
+  for k, v in batch.items():
     v = ag.Variable(v)
     rv[k] = v
   return rv
 
 def _prep(batch):
   if config.use_cuda():
-    batch = {k: v.cuda() for k, v in batch.iteritems()}
+    batch = {k: v.cuda() for k, v in batch.items()}
 
   batch = _var(batch)
   extras = {}
   features = {}
-  for k, v in batch.iteritems():
+  for k, v in batch.items():
     if k.startswith('features_'):
       features[k[len('features_'):]] = v
     else:

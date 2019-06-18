@@ -30,8 +30,7 @@ def make_jacobian(input, num_out):
     elif torch.is_tensor(input) or isinstance(input, Variable):
         return torch.zeros(input.nelement(), num_out)
     elif isinstance(input, Iterable):
-        jacobians = list(filter(
-            lambda x: x is not None, (make_jacobian(elem, num_out) for elem in input)))
+        jacobians = list([x for x in (make_jacobian(elem, num_out) for elem in input) if x is not None])
         if not jacobians:
             return None
         return type(input)(jacobians)
@@ -192,7 +191,7 @@ def gradcheck(func, inputs, eps=1e-6, atol=1e-5, rtol=1e-3, raise_exception=True
     output = _differentiable_outputs(func(*inputs))
     if any([o.requires_grad for o in output]):
         torch.autograd.backward(output, [o.data.new(o.size()).zero_() for o in output], create_graph=True)
-        var_inputs = list(filter(lambda i: isinstance(i, Variable), inputs))
+        var_inputs = list([i for i in inputs if isinstance(i, Variable)])
         if not var_inputs:
             raise RuntimeError("no Variables found in input")
         for i in var_inputs:

@@ -57,7 +57,7 @@ def gz(fd, mode = 'r'):
 
 def memmap(name2array, root_dir = None):
   dirname = tempfile.mkdtemp(dir = root_dir)
-  for k, v in name2array.iteritems():
+  for k, v in name2array.items():
     fname = os.path.join(dirname, k)
     np.save(fname, v)
   rv = {k: os.path.join(dirname, k + '.npy') for k in name2array}

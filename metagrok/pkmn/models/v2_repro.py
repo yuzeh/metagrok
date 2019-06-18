@@ -35,7 +35,7 @@ class Policy(TorchPolicy):
 
     total_poke_size = 0
     for f in self.poke_features:
-      if isinstance(f.size, (int, long)):
+      if isinstance(f.size, int):
         assert f.size > 0
         total_poke_size += f.size
       elif f.size is EMBED_SIZE:
@@ -285,7 +285,7 @@ MeanHp = DEX.gen7rb_stats().mean()['hp']
 StdHp = DEX.gen7rb_stats().std()['hp']
 
 def whiten_stats(stats):
-  return {k: (v - MeanStats[k]) / StdStats[k] / 3. for k, v in stats.iteritems()}
+  return {k: (v - MeanStats[k]) / StdStats[k] / 3. for k, v in stats.items()}
 
 def whiten_hp(hp):
   return (hp - MeanHp) / StdHp
@@ -312,7 +312,7 @@ def side2feat(side, poke_features):
     if poke['active']:
       active_idx = i
 
-  sideConditions = SideConditions.nhot(side['sideConditions'].keys())
+  sideConditions = SideConditions.nhot(list(side['sideConditions'].keys()))
 
   #if active_idx < 0:
   #  utils.debugger()
@@ -344,10 +344,10 @@ def poke2feat(poke, poke_features):
 
 _nodefault = object()
 def sort(key): return lambda d: sorted(d, key = key)
-def dictkeys(d): return d.keys()
-def dictvalues(d): return d.values()
+def dictkeys(d): return list(d.keys())
+def dictvalues(d): return list(d.values())
 def div(v): return lambda d: d / v
-def seqmap(f): return lambda seq: map(f, seq)
+def seqmap(f): return lambda seq: list(map(f, seq))
 
 def get(key, default = _nodefault):
   def func(d):

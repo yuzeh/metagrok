@@ -8,7 +8,7 @@ class RewardShaper(object):
     self._iteration = kwargs.get('iteration', 0)
 
   def __call__(self, blobs):
-    for i in reversed(range(len(blobs) - 1)):
+    for i in reversed(list(range(len(blobs) - 1))):
       nex = blobs[i + 1]
       cur = blobs[i]
       state = cur['state']
@@ -59,7 +59,7 @@ class NewRewardShaper(object):
         self._events[key] = kwargs[key]
 
   def __call__(self, blobs):
-    for i in reversed(range(len(blobs) - 1)):
+    for i in reversed(list(range(len(blobs) - 1))):
       nex = blobs[i + 1]
       cur = blobs[i]
       state = cur['state']
@@ -75,7 +75,7 @@ class NewRewardShaper(object):
         who = 'p2'
 
       for update in updates:
-        for event, delta in self._events.iteritems():
+        for event, delta in self._events.items():
           v = mentions(update, _key_to_event[event], who)
           if v != 0:
             if v > 0 or self._zero_sum:

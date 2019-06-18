@@ -4,8 +4,8 @@ import gevent.util
 from metagrok import utils
 from metagrok.games import api
 
-import actor
-from client import Client, wait
+from . import actor
+from .client import Client, wait
 
 assert wait
 assert Client

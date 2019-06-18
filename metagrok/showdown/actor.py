@@ -60,7 +60,7 @@ class Actor(object):
     else:
       opcode, data = message
 
-    if not isinstance(opcode, basestring):
+    if not isinstance(opcode, str):
       self.die('opcode [%r] is not a string', message)
 
     message = Message(opcode, data)

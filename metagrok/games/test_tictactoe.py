@@ -27,7 +27,7 @@ class TicTacToeTest(unittest.TestCase):
     game = Game(dangerous = self._dangerous, fix_ordering = True)
 
     buf = game.play(p1, p2)['buf']
-    states, candidates = zip(*buf)
+    states, candidates = list(zip(*buf))
 
     self.assertEqual(8, len(buf))
     self.assertEqual([ 0, 0, 0, 0, 0, 0, 0, 0, 0], states[0])
@@ -58,7 +58,7 @@ class TicTacToeTest(unittest.TestCase):
     game = Game(dangerous = self._dangerous, fix_ordering = True)
 
     buf = game.play(p1, p2)['buf']
-    states, candidates = zip(*buf)
+    states, candidates = list(zip(*buf))
 
     self.assertEqual(6, len(buf))
     self.assertEqual([ 0, 0, 0, 0, 0, 0, 0, 0, 0], states[0])
@@ -85,7 +85,7 @@ class TicTacToeTest(unittest.TestCase):
     game = Game(dangerous = self._dangerous, fix_ordering = True)
 
     buf = game.play(p1, p2)['buf']
-    states, candidates = zip(*buf)
+    states, candidates = list(zip(*buf))
 
     self.assertEqual(7, len(buf))
     self.assertEqual([ 0, 0, 0, 0, 0, 0, 0, 0, 0], states[0])
@@ -114,7 +114,7 @@ class TicTacToeTest(unittest.TestCase):
     game = Game(dangerous = self._dangerous, fix_ordering = True)
 
     buf = game.play(p1, p2)['buf']
-    states, candidates = zip(*buf)
+    states, candidates = list(zip(*buf))
 
     self.assertEqual(10, len(buf))
     self.assertEqual([ 0, 0, 0, 0, 0, 0, 0, 0, 0], states[0])

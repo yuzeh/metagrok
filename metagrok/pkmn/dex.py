@@ -1,9 +1,9 @@
+from functools import lru_cache
 import glob
 import logging
 import os
 import re
 
-from functools32 import lru_cache
 import numpy as np
 import pandas as pd
 
@@ -58,7 +58,7 @@ class Dex(object):
     rv = json.load(full_path)
 
     if key == 'BattleStatuses':
-      rv = {k: v for k, v in rv.iteritems() if v.get('effectType') == 'Status'}
+      rv = {k: v for k, v in rv.items() if v.get('effectType') == 'Status'}
     
     return rv
   
@@ -96,7 +96,7 @@ class Dex(object):
 
 class CategoricalFeature(object):
   def __init__(self, feature_key, dt):
-    keys = dt.keys()
+    keys = list(dt.keys())
     keys.extend(_key_to_extras[feature_key])
     keys = list(set(keys))
     keys.sort()

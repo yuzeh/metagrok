@@ -225,7 +225,7 @@ class Client(actor.Actor):
     return 'Client(%s)' % self._username
 
 def _parse_command(data):
-  parts = filter(None, [part.strip() for part in data.split('\n')])
+  parts = [_f for _f in [part.strip() for part in data.split('\n')] if _f]
   if data.startswith('>'):
     roomid = parts[0][1:]
     chunks = parts[1:]

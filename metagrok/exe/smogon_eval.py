@@ -116,7 +116,7 @@ def start(args):
   record = {'winner': 0, 'loser': 0, 'tie': 0}
   while matches:
     found = False
-    for i, msg in matches.iteritems():
+    for i, msg in matches.items():
       if msg.ready():
         result = msg.get()
         logger.info('Finished %d/%d matches: %s', count + 1, num_matches, result)

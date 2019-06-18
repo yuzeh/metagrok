@@ -108,7 +108,7 @@ def get(name):
 
   fmt = _NAME_TO_OPTIONS[name]
   rv = {}
-  for k, v in fmt.iteritems():
+  for k, v in fmt.items():
     if callable(v):
       v = v()
     rv[k] = v
@@ -116,11 +116,11 @@ def get(name):
 
 def random_matrix_team(name):
   rv = {'name': name}
-  rv['team'] = random.choice(_MATRIX_GRID_TEAMS.values())
+  rv['team'] = random.choice(list(_MATRIX_GRID_TEAMS.values()))
   return rv
 
 def default():
   return get('gen7randombattle')
 
 def all():
-  return _NAME_TO_OPTIONS.keys()
+  return list(_NAME_TO_OPTIONS.keys())

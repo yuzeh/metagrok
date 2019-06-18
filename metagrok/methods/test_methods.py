@@ -42,7 +42,7 @@ class VanillaPGTest(MethodTest):
 
     features = {
         k: np.repeat(np.expand_dims(v, axis = 0), 2, axis = 0)
-        for k, v in features.iteritems()}
+        for k, v in features.items()}
 
     advantages = np.array([-1., +1.], dtype = config.nt())
     log_probs = np.repeat(np.expand_dims(old_log_probs, axis = 0), 2, axis = 0)
@@ -55,11 +55,11 @@ class VanillaPGTest(MethodTest):
         value_preds = np.zeros(2, dtype = config.nt()),
         returns = np.zeros(2, dtype = config.nt()),
     )
-    for k, v in features.iteritems():
+    for k, v in features.items():
       extras['features_' + k] = v
     learner.post_prepare(extras)
     extras['advantages'] = np.array([-1., +1.], dtype = config.nt())
-    extras = TTensorDictDataset({k: torch.from_numpy(v) for k, v in extras.iteritems()})
+    extras = TTensorDictDataset({k: torch.from_numpy(v) for k, v in extras.items()})
 
     updater.update(extras)
 
@@ -103,7 +103,7 @@ class PPOTest(MethodTest):
 
     features = {
         k: np.repeat(np.expand_dims(v, axis = 0), 2, axis = 0)
-        for k, v in features.iteritems()}
+        for k, v in features.items()}
 
     advantages = np.array([-1., +1.], dtype = config.nt())
     log_probs = np.repeat(np.expand_dims(old_log_probs, axis = 0), 2, axis = 0)
@@ -116,11 +116,11 @@ class PPOTest(MethodTest):
         value_preds = np.zeros(2, dtype = config.nt()),
         returns = np.zeros(2, dtype = config.nt()),
     )
-    for k, v in features.iteritems():
+    for k, v in features.items():
       extras['features_' + k] = v
     learner.post_prepare(extras)
     extras['advantages'] = np.array([-1., +1.], dtype = config.nt())
-    extras = TTensorDictDataset({k: torch.from_numpy(v) for k, v in extras.iteritems()})
+    extras = TTensorDictDataset({k: torch.from_numpy(v) for k, v in extras.items()})
 
     updater.update(extras)
 

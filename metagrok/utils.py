@@ -1,5 +1,5 @@
 # coding=utf8
-from __future__ import unicode_literals
+
 
 import collections
 import calendar
@@ -16,13 +16,11 @@ import six
 import sys
 import time
 
-import functools32
-
 from metagrok.constants import ENCODING, LOG_FORMAT
 from metagrok import fileio
 
 def cache(maxsize = None):
-  return functools32.lru_cache(maxsize = maxsize)
+  return functools.lru_cache(maxsize = maxsize)
 
 def const(values = None):
   def rv(fn):
@@ -168,15 +166,15 @@ def clone_args(args):
 
 class Ns(object):
   def __init__(self, **kwargs):
-    for k, v in kwargs.iteritems():
+    for k, v in kwargs.items():
       setattr(self, k, v)
 
 def flatten_dict(d, sep = '_'):
   rv = {}
-  for k, v in d.iteritems():
+  for k, v in d.items():
     if isinstance(v, dict):
       v = flatten_dict(v, sep)
-      for vk, vv in v.iteritems():
+      for vk, vv in v.items():
         rv[k + sep + vk] = vv
     else:
       rv[k] = v
@@ -184,7 +182,7 @@ def flatten_dict(d, sep = '_'):
 
 def unflatten_dict(d, sep = '_'):
   rv = {}
-  for k, v in d.iteritems():
+  for k, v in d.items():
     parts = k.split(sep)
     cur = rv
     for part in parts[:-1]:
@@ -195,7 +193,7 @@ def unflatten_dict(d, sep = '_'):
   return rv
 
 def update_recursive(d, u):
-  for k, v in u.iteritems():
+  for k, v in u.items():
     if isinstance(v, collections.Mapping):
       d[k] = update_recursive(d.get(k, {}), v)
     else:
@@ -218,7 +216,7 @@ def debugger():
 
 def memory_dump(fname):
   import gc
-  import cPickle
+  import pickle
 
   with open(fname, 'w') as dump:
     for obj in gc.get_objects():
@@ -228,7 +226,7 @@ def memory_dump(fname):
       referents = [id(o) for o in gc.get_referents(obj) if hasattr(o, '__class__')]
       if hasattr(obj, '__class__'):
         cls = str(obj.__class__)
-        cPickle.dump({'id': i, 'class': cls, 'size': size, 'referents': referents}, dump)
+        pickle.dump({'id': i, 'class': cls, 'size': size, 'referents': referents}, dump)
 
 def touch(path):
   with open(path, 'a'):

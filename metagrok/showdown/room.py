@@ -128,7 +128,7 @@ class BattleRoom(actor.Actor):
         if req:
           parsed_req = json.loads(req)
           if not parsed_req.get('wait'):
-            if parsed_req.get('teamPreview') or filter(None, parser.parse_valid_actions(parsed_req)):
+            if parsed_req.get('teamPreview') or [_f for _f in parser.parse_valid_actions(parsed_req) if _f]:
               # This is a huge hack. We are expected to make a move on each request.
               # Unfortunately the state update messages come in after the request,
               # so we don't have access to the full state at the exact point the request

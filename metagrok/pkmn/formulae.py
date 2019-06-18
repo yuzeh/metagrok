@@ -2,9 +2,9 @@ import numpy as np
 
 from metagrok import config
 
-CONST_NONE = u'+none'
-CONST_HIDDEN = u'+hidden'
-CONST_UNKNOWN = u'+unknown'
+CONST_NONE = '+none'
+CONST_HIDDEN = '+hidden'
+CONST_UNKNOWN = '+unknown'
 
 EV = 510 / 6
 IV = 15
@@ -12,7 +12,7 @@ IV = 15
 def estimate_stats(base, level):
   level = config.nptype(level)
   rv = base.copy()
-  for k, b in base.iteritems():
+  for k, b in base.items():
     val = np.floor((2 * b + IV + np.floor(EV / 4.)) * level / 100.)
     if k == 'hp':
       rv[k] = val + level + 10

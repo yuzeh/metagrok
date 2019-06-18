@@ -49,11 +49,11 @@ def parse_valid_actions(req, is_trapped = False):
     rv = []
     for c in candidates:
       vs = c.split(',')
-      mvs = zip(mask, vs)
+      mvs = list(zip(mask, vs))
       all_valid = all(m.get(v) for m, v in mvs)
       no_double_switch = not any(
         k.startswith('switch') and v > 1
-        for k, v in collections.Counter(vs).iteritems())
+        for k, v in collections.Counter(vs).items())
       if all_valid and no_double_switch and c != 'pass,pass':
         rv.append(','.join(m.get(v) for m, v in mvs))
       else:

@@ -17,9 +17,7 @@ logger = logging.getLogger(__name__)
 
 @const()
 def script():
-  return (fileio
-      .read('{}/engine.js'.format(config.get('metagrok_client_root')))
-      .decode('utf-8'))
+  return fileio.read('{}/engine.js'.format(config.get('metagrok_client_root')))
 
 def mk_ctx():
   rv = py_mini_racer.MiniRacer()
@@ -150,7 +148,7 @@ def _strip_cycles(rv):
     for el in rv:
       _strip_cycles(el)
   elif isinstance(rv, dict):
-    for key in rv.keys():
+    for key in list(rv.keys()):
       if key in {'side', 'battle', 'p1', 'p2', 'foe', 'mySide', 'yourSide'}:
         del rv[key]
       else:
@@ -167,7 +165,7 @@ def _process(rv):
       val['weather'] = to_id(val['weather'] or F.CONST_NONE)
     if len(path) == 2 and 'sides' == path[0]:
       # mark the first pokemon as that has the ident in active as active
-      actives = set(filter(None, [_to_ident(p) for p in val['active']]))
+      actives = set([_f for _f in [_to_ident(p) for p in val['active']] if _f])
       for p in val['pokemon']:
         if p['ident'] in actives:
           actives.remove(p['ident'])
@@ -192,7 +190,7 @@ def _process(rv):
         for key in ['ability', 'baseAbility', 'item', 'prevItem', 'species', 'baseSpecies']:
           val[key] = to_id(val[key] or F.CONST_HIDDEN)
         val['types'] = [to_id(t) for t in val['types']]
-        val['abilities'] = {k: to_id(v) for k, v in val['abilities'].iteritems()}
+        val['abilities'] = {k: to_id(v) for k, v in val['abilities'].items()}
 
   walk(rv, fn)
 

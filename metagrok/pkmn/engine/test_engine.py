@@ -22,7 +22,7 @@ class UpdateWithRequestTest(unittest.TestCase):
     self.assertEqual(244., poke['hp'])
     self.assertEqual(
         [('icepunch', 0), ('uturn', 0), ('encore', 0), ('closecombat', 0)],
-        map(tuple, poke['moveTrack']))
+        list(map(tuple, poke['moveTrack'])))
     self.assertEqual('lifeorb', poke['item'])
     self.assertEqual('vitalspirit', poke['ability'])
     self.assertEqual('vitalspirit', poke['baseAbility'])
@@ -36,7 +36,7 @@ class UpdateWithRequestTest(unittest.TestCase):
     self.assertEqual(222., poke['hp'])
     self.assertEqual(
         [('flamethrower', 0), ('nastyplot', 0), ('suckerpunch', 0), ('darkpulse', 0)],
-        map(tuple, poke['moveTrack']))
+        list(map(tuple, poke['moveTrack'])))
     self.assertEqual('lifeorb', poke['item'])
     self.assertEqual('illusion', poke['ability'])
     self.assertEqual('illusion', poke['baseAbility'])

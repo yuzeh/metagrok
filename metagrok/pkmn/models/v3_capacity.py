@@ -1,4 +1,4 @@
-import v2_repro
+from . import v2_repro
 
 def HalfCapacity():
   return v2_repro.Policy(embed_size = 16, pkmn_size = 32)

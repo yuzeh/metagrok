@@ -178,7 +178,7 @@ def _parse_update(update):
         logs[3].append(line)
     except StopIteration:
       break
-  return dict(zip(['spectator', 'p1', 'p2', 'omniscient'], logs))
+  return dict(list(zip(['spectator', 'p1', 'p2', 'omniscient'], logs)))
 
 _TERM_SEQS = [
   ['update', 'end'],

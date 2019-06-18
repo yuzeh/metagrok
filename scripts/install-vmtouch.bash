@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-source activate pkmn
-
 mkdir -p /opt
 cd /opt
 

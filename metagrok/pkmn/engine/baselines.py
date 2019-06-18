@@ -15,10 +15,10 @@ from metagrok.pkmn.engine import navigation as nav
 
 def create_type_chart():
   rv = {}
-  for defender_type, type_data in json.load('dex/BattleTypeChart.json').iteritems():
+  for defender_type, type_data in json.load('dex/BattleTypeChart.json').items():
     defender_type = utils.to_id(defender_type)
     attacker_data = {}
-    for attacker_type, modifier in type_data['damageTaken'].iteritems():
+    for attacker_type, modifier in type_data['damageTaken'].items():
       attacker_type = utils.to_id(attacker_type)
       if modifier == 0:
         multiplier = 1.

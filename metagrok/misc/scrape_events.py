@@ -15,9 +15,9 @@ for fname in glob('data/misc-state/*.jsons')[:-1]:
     if blob['weather']:
       weathers.add(blob['weather'])
     for side in blob['sides']:
-      side_conditions.update(side['sideConditions'].keys())
+      side_conditions.update(list(side['sideConditions'].keys()))
       for pokemon in side['pokemon']:
-        volatiles.update(pokemon.get('volatiles', {}).keys())
+        volatiles.update(list(pokemon.get('volatiles', {}).keys()))
 
 for fname, data in [
     ('BattleSideConditions', side_conditions),

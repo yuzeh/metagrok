@@ -73,7 +73,7 @@ class BattleQueue(actor.Actor):
       self._s.searching = data['searching'] or []
     if 'challengesFrom' in data:
       new_challenges_from = data['challengesFrom'] or {}
-      for opp, fmt in new_challenges_from.iteritems():
+      for opp, fmt in new_challenges_from.items():
         if self._s.challenges_from.get(opp) != fmt:
           if not self._accept_challenges:
             self.info('ignored [%s] challenge from [%s], not accepting challenges', fmt, opp)

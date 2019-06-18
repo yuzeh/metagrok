@@ -19,7 +19,7 @@ class ModelsTest(unittest.TestCase):
 
     rv = policy.act(state, candidates)
 
-    self.assertItemsEqual(rv.keys(), {'probs', 'log_probs', 'value_pred'})
+    self.assertSetEqual(set(rv.keys()), {'probs', 'log_probs', 'value_pred'})
 
   def test_v2(self):
     policy = v2.Policy()
@@ -32,4 +32,4 @@ class ModelsTest(unittest.TestCase):
 
     rv = policy.act(state, candidates)
 
-    self.assertItemsEqual(rv.keys(), {'probs', 'log_probs', 'value_pred'})
+    self.assertSetEqual(set(rv.keys()), {'probs', 'log_probs', 'value_pred'})

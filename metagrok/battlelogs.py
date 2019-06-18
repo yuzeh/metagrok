@@ -2,9 +2,9 @@ import os
 import gzip
 
 try:
-  from cStringIO import StringIO
+  from io import StringIO
 except ImportError:
-  from StringIO import StringIO
+  from io import StringIO
 
 from metagrok import np_json as json
 from metagrok import jsons
@@ -61,7 +61,7 @@ def compute_returns(path, final_reward, gamma = 0.99, lam = 0.95):
   delta = final_reward - path[-1]['value_pred']
   path[-1]['advantage'] = gae = delta
 
-  for i in reversed(range(len(path) - 1)):
+  for i in reversed(list(range(len(path) - 1))):
     cp = path[i]
     np = path[i + 1]
     delta = cp.get('reward', 0.0) + gamma * np['value_pred'] - cp['value_pred']

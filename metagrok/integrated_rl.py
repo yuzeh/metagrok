@@ -99,7 +99,7 @@ def simulate_and_rollup(expt_name, base_dir, parallelism, cuda):
     num_blocks = 0
     battle_number = num_battles
 
-    workers, fds = zip(*[spawn_battler(i) for i in range(parallelism)])
+    workers, fds = list(zip(*[spawn_battler(i) for i in range(parallelism)]))
     for i in range(num_battles_remaining):
       workers[i % len(workers)].stdin.write('battle\n')
     
@@ -208,13 +208,13 @@ def perform_policy_update(expt_name, base_dir, parallelism, cuda):
 
   start_time = time.time()
   logger.info('Starting policy update...')
-  extras = {k: torch.from_numpy(v) for k, v in extras.iteritems()}
+  extras = {k: torch.from_numpy(v) for k, v in extras.items()}
   extras = TTensorDictDataset(extras, in_place_shuffle = True)
 
   policy = torch_policy.load(policy_tag)
   updater_cls = utils.hydrate(expt['updater'])
   updater_args = dict(expt['updater_args'])
-  for k, v in expt.get('updater_args_schedules', {}).iteritems():
+  for k, v in expt.get('updater_args_schedules', {}).items():
     updater_args[k] = Scheduler(v).select(current_iter)
   updater = updater_cls(policy = policy, **updater_args)
   if config.use_cuda():
@@ -338,7 +338,7 @@ def perform_rollup(expt, iter_dir, policy_tag, parallelism, rollup_fname):
   subprocess.check_call(['zip', '-q', '-r', '/tmp/battles', 'battles'], cwd = iter_dir)
   shutil.move('/tmp/battles.zip', os.path.join(iter_dir, 'battles.zip'))
   shutil.rmtree(os.path.join(iter_dir, 'battles'))
-  return extras.values()[0].shape[0]
+  return list(extras.values())[0].shape[0]
 
 _name_to_prog = dict(
   run_one_iteration = run_one_iteration,
@@ -353,7 +353,7 @@ def main():
   parser.add_argument('base_dir')
   parser.add_argument('--cuda', action = 'store_true')
   parser.add_argument('--parallelism', type = int, default = mp.cpu_count())
-  parser.add_argument('--prog', choices = _name_to_prog.keys(), default = 'run_one_iteration')
+  parser.add_argument('--prog', choices = list(_name_to_prog.keys()), default = 'run_one_iteration')
 
   args = parser.parse_args()
 

@@ -6,7 +6,7 @@ import traceback
 import threading
 
 if sys.version_info[0] == 2:
-    import Queue as queue
+    import queue as queue
 else:
     import queue
 
@@ -129,7 +129,7 @@ def default_collate(batch):
     elif isinstance(batch[0], collections.Mapping):
         return {key: default_collate([d[key] for d in batch]) for key in batch[0]}
     elif isinstance(batch[0], collections.Sequence):
-        transposed = zip(*batch)
+        transposed = list(zip(*batch))
         return [default_collate(samples) for samples in transposed]
 
     raise TypeError((error_msg.format(type(batch[0]))))
