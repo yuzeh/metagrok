@@ -1,10 +1,7 @@
 import os
 import gzip
 
-try:
-  from io import StringIO
-except ImportError:
-  from io import StringIO
+from io import StringIO
 
 from metagrok import np_json as json
 from metagrok import jsons
@@ -22,7 +19,8 @@ class BattleLogger(object):
   def log(self, blob, **kwargs):
     if self._fd:
       blob.update(kwargs)
-      self._fd.write(json.dumps(blob) + '\n')
+      message = json.dumps(blob) + '\n'
+      self._fd.write(message.encode('utf-8'))
 
   def result(self, opcode):
     self.log({}, result = opcode)

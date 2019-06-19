@@ -8,7 +8,7 @@
   "node_version": "v10.15.3",
 
   "showdown_server_uri": "https://github.com/yuzeh/Pokemon-Showdown.git",
-  "showdown_server_sha": "e3e269956ab0e9c93e69a597dfe39688f5b32430",
+  "showdown_server_sha": "4d6bb5638e49bcdebdf17fe42f52d6f5d3a2f875",
   "showdown_server_dir": "server",
 
   "showdown_client_uri": "https://github.com/yuzeh/Pokemon-Showdown-Client.git",

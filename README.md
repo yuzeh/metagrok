@@ -30,7 +30,7 @@ This docker container freezes versioning for three main components:
 * Node.js version
 * Pokémon Showdown server commit SHA
 
-Any update to one of these things require a rebuild of the docker container.
+Any update to one of these things require a rebuild of the Docker container.
 In particular, no source code (i.e. nothing in the `metagrok/` or the `js/` directories) is frozen.
 For convenience during development, any new conda packages that are installed should simply be
 appended to `scripts/install-more-conda-packages.sh`.
@@ -39,12 +39,12 @@ To develop code in this environment, run in a terminal window:
 
     docker run -it -v $(pwd):/root/workspace --entrypoint /bin/bash metagrok:latest
 
-    # inside the docker instance
+    # inside the Docker instance
     (metagrok) [root@6a31f1d57424]# cd workspace
 
 ### Building Showdown-related components
 
-The first thing to do is to set up the correct Node version, download both showdown repos, and
+The first thing to do is to set up the correct Node version, download both Showdown repos, and
 create the headless client:
 
     scripts/install.sh
@@ -59,8 +59,8 @@ The rest of this section contains common things one might want to do with a Show
     ./rp metagrok/exe/head2head.py \
         --format gen7randombattle \
         --p1 ,metagrok.pkmn.engine.baselines.MostDamageMovePlayerTypeAware \
-        --p2 metagrok.pkmn.models.V3Quad:static/sample-v3-quad-model.pytorch \
-        --num-matches 10 --parallelism 4
+        --p2 metagrok.pkmn.models.v3_capacity.QuadCapacity:static/sample-v3-quad-model.pytorch \
+        --num-matches 10
 
 ### Evaluating a bot against humans on a Pokémon Showdown server
 
@@ -74,6 +74,18 @@ The rest of this section contains common things one might want to do with a Show
 ### Training the bot
 
 TODO add this portion
+
+### Are there unit tests???
+
+Yes, there are some unit tests, though code coverage is woefully low. In the Docker environment, run
+`nose2` to execute all of the Python unit tests. 
+
+TODOs
+
+* add training portion
+* un-hardcode directory names and use `config.json`
+* add contributing section
+* test the code
 
 [showdown]: https://pokemonshowdown.com
 [ps]: https://github.com/Zarel/Pokemon-Showdown

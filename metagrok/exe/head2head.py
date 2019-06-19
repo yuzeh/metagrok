@@ -27,7 +27,12 @@ def start(args):
   utils.mkdir_p(p1dir)
   utils.mkdir_p(p2dir)
 
-  game = Game(formats.get(args.format))
+  prog = os.path.join(
+      config.get('showdown_root'),
+      config.get('showdown_server_dir'),
+      'pokemon-showdown')
+
+  game = Game(options = formats.get(args.format), prog = prog)
 
   policy_1 = torch_policy.load(args.p1)
   policy_2 = torch_policy.load(args.p2)

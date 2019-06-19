@@ -28,6 +28,8 @@ _key_to_extras = dict(
     BattleWeathers = [F.CONST_NONE, F.CONST_UNKNOWN],
 )
 
+HP_REGEX = re.compile(r'hiddenpower([^\d]+)(\d+)')
+
 _cache_miss = object()
 
 class Dex(object):

@@ -4,9 +4,17 @@ import requests
 
 from metagrok import keys
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 _keys = keys.get()
 
 def send(subject, text, attachments = []):
+  if _keys is None:
+    logger.warn('Not sending out email, metagrok.keys module is not set up properly')
+    return None
+
   files = []
   for a in attachments:
     files.append(('attachment', (a, open(a, 'rb'), 'text/plain')))

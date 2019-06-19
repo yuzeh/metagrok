@@ -1,4 +1,5 @@
 import atexit
+import copy
 import json
 import logging
 import os
@@ -8,7 +9,6 @@ import subprocess
 import sys
 import threading
 
-_PROG = 'vendor/ps-fork/pokemon-showdown'
 
 DEFAULT_OPTIONS = {
   'formatid': 'gen7randombattle',
@@ -33,23 +33,28 @@ def shutdown():
 
 class Battle(object):
   def __init__(self, options = DEFAULT_OPTIONS, prog = None, timeout_ok = False):
-    prog = prog or _PROG
     self.logger = logging.getLogger(__name__)
     self.proc = subprocess.Popen(
       (prog, 'simulate-battle'),
       stdin = subprocess.PIPE,
       stdout = subprocess.PIPE,
+      bufsize = 0,  # otherwise this doesn't play nicely with select
     )
     _all_pids.add(self.proc.pid)
-    self._send('>start %s' % json.dumps(options))
+
+    options = copy.deepcopy(options)
+    p1 = options.pop('p1')
+    p2 = options.pop('p2')
+
+    self._send('>start {}'.format(json.dumps(options)))
+    self._send('>player p1 {}'.format(json.dumps(p1)))
+    self._send('>player p2 {}'.format(json.dumps(p2)))
+
     self._closed = False
     self._timeout_ok = timeout_ok
-    self._poll = select.poll()
-    self._poll.register(self.proc.stdout, select.POLLIN)
 
   def close(self):
     if not self._closed:
-      self._poll.unregister(self.proc.stdout)
       os.kill(self.proc.pid, signal.SIGINT)
       self.proc.communicate()
       _all_pids.remove(self.proc.pid)
@@ -65,7 +70,7 @@ class Battle(object):
     self.logger.debug(msg)
     
     self.proc.stdin.write(msg.encode('utf-8'))
-    self.proc.stdin.write('\n')
+    self.proc.stdin.write(b'\n')
 
   def recv(self):
     '''
@@ -142,16 +147,18 @@ class Battle(object):
     timeout = 3.0 if self._timeout_ok else 60.
 
     while True:
-      if not self._poll.poll(timeout * 1000):
+      r, _, _ = select.select([self.proc.stdout.fileno()], [], [], timeout)
+      if self.proc.stdout.fileno() not in r:
         if not self._timeout_ok:
           _timeout()
         else:
           raise BattleInputIncomplete()
 
       line = self.proc.stdout.readline().decode('utf-8')
-      if line == '\n':
-        break
+      self.logger.debug(repr(line))
       line = line.strip()
+      if not line:
+        break
       if not line.startswith('>') and not line.startswith('[slow battle]'):
         rv.append(line)
 
@@ -161,24 +168,29 @@ class Battle(object):
     self.proc.stdout.flush()
 
 def _parse_update(update):
-  logs = [[] for i in range(4)]
+  logs = {k: [] for k in ['spectator', 'p1', 'p2', 'omniscient']}
   itr = iter(update)
   while True:
     try:
       line = next(itr)
-      if line == '|split':
-        logs[0].append(next(itr))
-        logs[1].append(next(itr))
-        logs[2].append(next(itr))
-        logs[3].append(next(itr))
+      if line.startswith('|split|'):
+        player = line[len('|split|'):]
+        private = next(itr)
+        public = next(itr)
+
+        logs['omniscient'].append(private)
+        logs['spectator'].append(public)
+        for p in ['p1', 'p2']:
+          if p == player:
+            logs[p].append(private)
+          else:
+            logs[p].append(public)
       else:
-        logs[0].append(line)
-        logs[1].append(line)
-        logs[2].append(line)
-        logs[3].append(line)
+        for k in logs:
+          logs[k].append(line)
     except StopIteration:
       break
-  return dict(list(zip(['spectator', 'p1', 'p2', 'omniscient'], logs)))
+  return logs
 
 _TERM_SEQS = [
   ['update', 'end'],
