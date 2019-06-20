@@ -25,7 +25,9 @@ def main():
     p2_policy = torch_policy.load(args.p2_policy_tag)
 
   fmt = formats.get(args.fmt)
-  game = Game(fmt, 'vendor/ps-fork/pokemon-showdown')
+  game = Game(fmt, '{}/{}/pokemon-showdown'.format(
+      config.get('showdown_root'),
+      config.get('showdown_server_dir')))
   count = 0
   while True:
     time.sleep(0.1)

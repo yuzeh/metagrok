@@ -59,7 +59,7 @@ class ShowdownConnection(actor.Actor):
 
   def _pong(self, opcode, data):
     if opcode in OPCODE_DATA and data is not None:
-      self._parent.send(('command-from-server', data))
+      self._parent.send(('command-from-server', data.decode('utf-8')))
 
     if opcode == websocket.ABNF.OPCODE_CLOSE:
       self._parent.send('forced-socket-close', None)

@@ -29,6 +29,7 @@ _key_to_extras = dict(
 )
 
 HP_REGEX = re.compile(r'hiddenpower([^\d]+)(\d+)')
+RETURN_REGEX = re.compile(r'return(\d+)')
 
 _cache_miss = object()
 
@@ -123,6 +124,9 @@ class CategoricalFeature(object):
       match = HP_REGEX.match(name)
       if match:
         name = 'hiddenpower' + match.group(1)
+    elif name.startswith('return') and RETURN_REGEX.match(name):
+      name = 'return'
+
     if name not in self.name_to_index:
       logger.warn('Could not find %s in %s', name, self.feature_key)
       return 1

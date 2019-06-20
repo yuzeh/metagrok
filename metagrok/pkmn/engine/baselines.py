@@ -15,7 +15,8 @@ from metagrok.pkmn.engine import navigation as nav
 
 def create_type_chart():
   rv = {}
-  for defender_type, type_data in json.load('dex/BattleTypeChart.json').items():
+  type_chart_fname = '{}/BattleTypeChart.json'.format(config.get('dex_root'))
+  for defender_type, type_data in json.load(type_chart_fname).items():
     defender_type = utils.to_id(defender_type)
     attacker_data = {}
     for attacker_type, modifier in type_data['damageTaken'].items():
@@ -35,7 +36,7 @@ def create_type_chart():
     rv[defender_type] = attacker_data
   return rv
 
-Movedex = json.load('dex/BattleMovedex.json')
+Movedex = json.load('{}/BattleMovedex.json'.format(config.get('dex_root')))
 TypeChart = create_type_chart()
 
 class RandomPlayer(object):

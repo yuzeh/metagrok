@@ -1,10 +1,12 @@
 import unittest
 
-from metagrok.pkmn.reward_shaper import RewardShaper
+from metagrok import config
 from metagrok import jsons
 
+from metagrok.pkmn.reward_shaper import RewardShaper
+
 def load_test_data():
-  return jsons.load('test-data/reward-shaper-tests.jsons')
+  return jsons.load('{}/reward-shaper-tests.jsons'.format(config.get('test_data_root')))
 
 class RewardShaperTest(unittest.TestCase):
   def test_faint(self):
