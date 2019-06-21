@@ -1,4 +1,4 @@
-# Metagrok (README WIP)
+# Metagrok
 A self-play Reinforcement Learning system for learning to battle on [Pokémon Showdown][showdown].
 This code was used in work [A Self-Play Policy Optimization Approach To Battling Pokémon][paper].
 
@@ -92,7 +92,6 @@ A few things that come to mind for me:
 * Refactor the code so that this project makes sense as a package on PyPI
 
 Please open an issue with a proposed plan before starting to do any work!
-
 
 [showdown]: https://pokemonshowdown.com
 [ps]: https://github.com/Zarel/Pokemon-Showdown
