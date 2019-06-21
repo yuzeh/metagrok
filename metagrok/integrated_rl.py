@@ -75,7 +75,7 @@ def simulate_and_rollup(expt_name, base_dir, parallelism, cuda):
       env['OMP_NUM_THREADS'] = '1'
       env['MKL_NUM_THREADS'] = '1'
       err_fd = open('/tmp/%03d.err.log' % bid, 'w')
-      args = ['./rp', '--no-git', 'metagrok/exe/simulate_worker.py',
+      args = ['./rp', 'metagrok/exe/simulate_worker.py',
         policy_tag,
         expt.get('format', 'gen7randombattle'),
         str(bid),
@@ -92,6 +92,8 @@ def simulate_and_rollup(expt_name, base_dir, parallelism, cuda):
         stdin = subprocess.PIPE,
         stderr = err_fd,
         env = env,
+        encoding = 'utf-8',
+        bufsize = 0,
       )
       os.system('taskset -p -c %d %d' % (bid % mp.cpu_count(), rv.pid))
       return rv, err_fd
@@ -190,7 +192,7 @@ def perform_policy_update(expt_name, base_dir, parallelism, cuda):
       for k in npz.files:
         all_extras[k].append(npz[k])
   extras = {}
-  for k, vs in all_extras.items():
+  for k, vs in list(all_extras.items()):
     extras[k] = np.concatenate(vs)
     # This is a hack to save on memory.
     # The optimal solution is to
@@ -227,7 +229,7 @@ def perform_policy_update(expt_name, base_dir, parallelism, cuda):
   total_time = time.time() - start_time
   logger.info('Ran policy update in %ss', total_time)
 
-  with open('/tmp/end_model_file.pytorch', 'w') as fd:
+  with open('/tmp/end_model_file.pytorch', 'wb') as fd:
     torch.save(policy.state_dict(), fd)
   end_model_file = os.path.join(iter_dir, 'end.pytorch')
   shutil.move('/tmp/end_model_file.pytorch', end_model_file)
@@ -312,7 +314,7 @@ def divine_current_policy_tag(expt, iter_dir, current_iter):
       policy = torch_policy.load(tag)
     else:
       policy = torch_policy.load(expt['policy_cls'])
-    with open(start_model_file, 'w') as fd:
+    with open(start_model_file, 'wb') as fd:
       torch.save(policy.state_dict(), fd)
     del policy
   return '%s:%s' % (expt['policy_cls'], start_model_file)

@@ -50,7 +50,7 @@ class NamedPipe(object):
             l = int(txt)
             data=self.inp.read(l)
             if len(data) < l: self.inp.close()
-            return pickle.loads(data)  # Convert back to python object.
+            return pickle.loads(data.encode('utf-8'))  # Convert back to python object.
             
     def close(self):
         self.inp.close()

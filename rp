@@ -2,10 +2,7 @@
 # 1. Makes sure the script is running from the root directory
 # 2. Run a python script, adding the current working directory to the PYTHONPATH.
 
-if [ "$1" = "--no-git" ] ;
-then
-  shift
-elif [ ! -f "config.json" ] ;
+if [ ! -f "config.json" ] ;
 then
   echo "Please run this script inside the project root directory."
   exit 1

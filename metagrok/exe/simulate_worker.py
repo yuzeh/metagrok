@@ -33,8 +33,6 @@ def main():
     time.sleep(0.1)
 
     r = sys.stdin.readline().strip()
-    if not r:
-      continue
 
     if r == 'done':
       break

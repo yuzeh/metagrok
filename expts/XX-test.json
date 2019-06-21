@@ -1,0 +1,45 @@
+{
+  "policy_cls": "metagrok.pkmn.models.v3_capacity.QuadCapacity",
+  "updater": "metagrok.methods.ppo.PPOUpdater",
+  "num_iters": 10,
+  "simulate_args": {
+    "num_matches": 10
+  },
+  "updater_args": {
+    "vbatch_size": 128,
+    "pbatch_size": 128,
+    "clip_param": 0.1,
+    "weight_decay": 1e-6,
+    "opt_lr": 1e-4,
+    "num_epochs": 1
+  },
+  "updater_args_schedules": {
+    "entropy_coef": [
+      {"value": 1e-2, "until": 2},
+      {"value": 1e-3, "until": 4},
+      {"value": 1e-4, "until": 6},
+      {"value": 1e-5, "until": 8},
+      {"value": 1e-6, "until": 10}
+    ]
+  },
+  "updater_buffer_length_iters": 2,
+  "reward_args": {
+    "gamma": 0.95,
+    "lam": 0.9,
+    "shaping": {
+      "faint": 0.05,
+      "fail": 0.01,
+      "supereffective": 0.005,
+      "resisted": 0.005,
+      "immune": 0.01
+    }
+  },
+  "evaluate_args": {
+    "every": 25,
+    "flags": {
+      "p2": "metagrok.pkmn.models.V3Quad:/nfs/integrated-rl-runs/10-v3-quad/iter000480/start.pytorch",
+      "num-matches": 1000,
+      "play-best-move": "p1"
+    }
+  }
+}

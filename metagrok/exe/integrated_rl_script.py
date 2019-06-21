@@ -28,7 +28,7 @@ def main():
 
     if current_iter >= expt['num_iters']:
       break
-    cmd = ['./rp', '--no-git', 'metagrok/integrated_rl.py']
+    cmd = ['./rp', 'metagrok/integrated_rl.py']
     cmd.extend(sys.argv[1:])
     logger.info('Running command: %s', cmd)
     subprocess.check_call(cmd, stdout = sys.stdout, stderr = sys.stderr)

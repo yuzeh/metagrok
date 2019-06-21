@@ -81,6 +81,8 @@ class GamePlayer(object):
   def request(self, log):
     if not log:
       return
+    import sys
+    print(log, file = sys.stderr)
     _, cmd, arg = log.split('|', 2)
 
     requires_action = False
@@ -109,7 +111,8 @@ class GamePlayer(object):
 
     elif cmd == 'error':
       assert 'trapped' in arg, 'Error log does not have trapped: ' + log
-      assert 'trapped' in self.last_sideupdate, 'Last sidereq: ' + self.last_sideupdate
+      # 2019-06-20: Current version of PS doesn't send the next req before the error?
+      # assert 'trapped' in self.last_sideupdate, 'Last sidereq: ' + self.last_sideupdate
 
     else:
       raise ValueError('Unknown cmd: ' + log)

@@ -1,0 +1,29 @@
+{
+  "policy_cls": "metagrok.pkmn.models.v3_capacity.QuadCapacity",
+  "updater": "metagrok.methods.ppo.PPOUpdater",
+  "num_iters": 500,
+  "simulate_args": {
+    "num_matches": 7680
+  },
+  "updater_args": {
+    "vbatch_size": 8192,
+    "clip_param": 0.1,
+    "weight_decay": 2e-6,
+    "opt_lr": 2e-4,
+    "num_epochs": 6
+  },
+  "updater_buffer_length_iters": 1,
+  "reward_args": {
+    "gamma": 0.95,
+    "lam": 0.9,
+    "shaping": {
+      "new_style": true,
+      "zero_sum": true,
+      "faint": -0.0125,
+      "fail": -0.005,
+      "supereffective": -0.0025,
+      "resisted": 0.0025,
+      "immune": 0.005
+    }
+  }
+}
