@@ -1,6 +1,6 @@
 # Metagrok
 A self-play Reinforcement Learning system for learning to battle on [Pokémon Showdown][showdown].
-This code was used in work [A Self-Play Policy Optimization Approach To Battling Pokémon][paper].
+This code was used in the work: [A Self-Play Policy Optimization Approach To Battling Pokémon][paper].
 
 ## How does it work?
 There are three pieces of functionality that make this system work:
