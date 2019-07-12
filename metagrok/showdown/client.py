@@ -202,6 +202,7 @@ class Client(actor.Actor):
       self._s.started_auth_attempt = True
     elif message.startswith('|updateuser'):
       username = message.split('|')[2]
+      username = username[1:]
       if username.lower().startswith('guest '):
         if self._s.started_auth_attempt:
           self.die('attempted auth but received message [%s]', message)
