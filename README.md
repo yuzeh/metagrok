@@ -64,12 +64,14 @@ The rest of this section contains common things one might want to do with a Show
 
 ### Evaluating a bot against humans on a Pokémon Showdown server
 
-    # Set up showdown server on localhost:8000
+    # 1. Set up showdown server on localhost:8000
+
+    # host.docker.internal is the docker's DNS name for the host machine
     ./rp metagrok/exe/smogon_eval.py \
         metagrok.pkmn.models.v3_capacity.QuadCapacity:static/sample-v3-quad-model.pytorch \
         --num-matches 8 \
         --max-concurrent 4 \
-        --host localhost --port 8000
+        --host host.docker.internal --port 8000
 
 ### Training the bot
 
