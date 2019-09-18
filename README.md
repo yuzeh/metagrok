@@ -93,6 +93,8 @@ A few things that come to mind for me:
 * Fix `challenge_bot.py` (an agent on a Showdown server that only responds to challenges)
 * Refactor the code so that this project makes sense as a package on PyPI
 
+A less trivial (but way more exciting) improvement would be to make this work with doubles (and thereby work with VGC formats)!
+
 Please open an issue with a proposed plan before starting to do any work!
 
 [showdown]: https://pokemonshowdown.com
